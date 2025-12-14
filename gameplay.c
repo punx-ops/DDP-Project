@@ -29,7 +29,7 @@ void go_outside(Player *p) {
                     earned = rand() % 31 + 20; 
                     p->money += earned;
                     p->energy -= 20;
-                    if ((rand() % 100) < 100) {
+                    if ((rand() % 100) < 20) {
                         int damage = rand() % 11 + 10;
                         p->health -= damage;
                         printf("\n[!] ACCIDENT AT WORK!\n");
