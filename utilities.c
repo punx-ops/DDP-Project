@@ -2,17 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include "utilities.h"
-
+// Handles Input Buffer
 void clear_buffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF) { }
 }
-
+// Pause Function
 void wait_for_enter() {
     printf("\n[Press Enter to continue...]");
     clear_buffer();
 }
-
+// Clear Screen Function
 void clear_screen() {
     #ifdef _WIN32
         system("cls");
@@ -20,7 +20,7 @@ void clear_screen() {
         system("clear");
     #endif
 }
-
+// Integer Input Validation
 int get_valid_int(const char* prompt) {
     int value;
     while (1) {
@@ -34,7 +34,7 @@ int get_valid_int(const char* prompt) {
         }
     }
 }
-
+// Float Input Validation
 float get_valid_float(const char* prompt) {
     float value;
     while (1) {
@@ -48,7 +48,7 @@ float get_valid_float(const char* prompt) {
         }
     }
 }
-
+// String Input Validation
 void get_valid_string(const char* prompt, char* buffer, int size) {
     printf("%s", prompt);
     if (fgets(buffer, size, stdin) != NULL) {

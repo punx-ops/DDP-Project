@@ -1,30 +1,30 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "utilities.h"
+#include "gameplay.h"
 
 int main() {
-    // --- STATE VARIABLES ---
-    char name[50];
-    int health = 100;
-    int energy = 100;
-    int money = 0;
+    Player hero;
+    hero.health = 100;
+    hero.energy = 100;
+    hero.money = 50;
     int choice;
 
-    // --- SETUP ---
+    //SETUP
     clear_screen();
-    get_valid_string("Enter your character's name: ", name, sizeof(name));
+    get_valid_string("Enter your character's name: ", hero.name, sizeof(hero.name));
     
-    printf("Welcome, %s.\n", name);
+    printf("Welcome, %s.\n", hero.name);
     wait_for_enter();
 
-    // --- GAME LOOP ---
+    //GAMEPLAY
     while (1) {
+        if (hero.health <= 0) break;
         clear_screen();
-
-        // HUD
         printf("========================================\n");
-        printf("PLAYER: %s | HP: %d | ENERGY: %d | $: %d\n", name, health, energy, money);
+        printf("PLAYER: %s | HP: %d | ENERGY: %d | $: %d\n", hero.name, hero.health, hero.energy, hero.money);
         printf("========================================\n");
-        printf("You are at home.\n\n");
+        printf("You are at home!\n\n");
 
         printf("1. Clean House (-20 Energy)\n");
         printf("2. Go Outside\n");
@@ -34,28 +34,29 @@ int main() {
         choice = get_valid_int(">> ");
 
         switch (choice) {
-            case 1: // Clean
-                if (energy >= 20) {
+            case 1:
+                if (hero.energy >= 20) {
                     printf("You cleaned the house.\n");
-                    energy -= 20;
+                    hero.energy -= 20;
                 } else {
                     printf("Too tired.\n");
                 }
                 wait_for_enter();
                 break;
 
-            case 2: // Outside
-                printf("You step outside... (feature coming soon)\n");
+            case 2:
+                printf("You step outside...\n");
                 wait_for_enter();
+                go_outside(&hero);
                 break;
 
-            case 3: // Sleep
+            case 3:
                 printf("Zzz... Energy restored.\n");
-                energy = 100;
+                hero.energy = 100;
                 wait_for_enter();
                 break;
 
-            case 0: // Quit
+            case 0:
                 printf("Goodbye.\n");
                 return 0;
 
@@ -64,5 +65,15 @@ int main() {
                 wait_for_enter();
         }
     }
+    clear_screen();
+    printf("\n\n");
+    printf("########################################\n");
+    printf("#              YOU DIED                #\n");
+    printf("########################################\n");
+    printf("\n");
+    printf("Rest in Peace, %s.\n", hero.name);
+    printf("You died with $%d in your pocket.\n", hero.money);
+    printf("\n");
+    printf("GAME OVER\n");
     return 0;
 }
