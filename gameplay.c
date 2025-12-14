@@ -17,7 +17,7 @@ void go_outside(Player *p) {
 
         printf("1. Work at Construction Site (+$$$, -20 Energy)\n");
         printf("2. Go to Gym (+20 HP, -40 Energy)\n");
-        printf("3. Go to Market (Coming Soon)\n");
+        printf("3. Go to Market\n");
         printf("4. Go To Park (-20 Energy)\n");
         printf("0. Return Home\n");
 
